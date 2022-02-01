@@ -424,32 +424,7 @@ bot.on('guildMemberAdd', async member => {
 	let logs = await wb.get(`logs.${member.guild.id}`);
 	let punishment = wb.get(`punishment.${member.guild.id}`);
 	let bypassed = await wb.get(`bypass.${member.guild.id}`);
-	if(!bypassed.includes(member.id)) {
 	
-	let day = Number(age)
-    let x = Date.now() - member.user.createdAt;
-    let created = Math.floor(x / 86400000);
-	
-	if (day >= created) {
-		member[punishment](
-			`Alt detected - Account younger than ${day} days`
-		);
-		let channel = await bot.channels.cache.get(logs);
-		let embed = new discord.MessageEmbed()
-			.setTitle(`Suspicious! Account age less than ${day} days`)
-			.addField(`Member Username`, member.toString())
-			.addField(`Member ID`, member.id)
-			.addField(
-				`Account Age`, moment(member.user.createdAt).format('MMMM Do YYYY, h:mm:ss a'))
-      .addField(`Punishment`, punishment)
-			.setColor('#FF0000')
-			.setFooter(
-				member.guild.name,
-				member.guild.iconURL({ dynamic: true })
-			);
-		if (channel) channel.send({ embed: embed });
-	}
-	}
 });
 
 function parseMs(str) {
